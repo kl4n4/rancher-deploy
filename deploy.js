@@ -100,7 +100,7 @@ function upgradeService(environmentId, serviceId, launchConfig, callback) {
             }
             var data = res.body;
             console.info('triggered upgrade of service "' + data.name +  '"');
-            checkUpgradeStatus(serviceId, callback, 5, 600);
+            checkUpgradeStatus(environmentId, serviceId, callback, 5, 600);
         });
 }
 
@@ -113,7 +113,6 @@ function checkUpgradeStatus(environmentId, serviceId, callback, intervalSecs, ti
             }, 'rollback');
         }, 'cancelupgrade');
     }
-    console.info('setTimeout to', intervalSecs*1000);
     var timeout = setTimeout(function() {
         console.info(' ...checking status of upgrade process for service ' + serviceId + '...');
         getService(environmentId, serviceId, function(data) {
