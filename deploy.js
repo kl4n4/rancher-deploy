@@ -86,7 +86,7 @@ function upgradeService(environmentId, serviceId, launchConfig, callback) {
         .set('Content-Type', 'application/json')
         .send({
             "inServiceStrategy": {
-                "batchSize": 1,
+                "batchSize": 3,
                 "intervalMillis": 2000,
                 "startFirst": true,
                 "launchConfig": launchConfig
