@@ -4,6 +4,9 @@ var API_URL     = process.env.RANCHER_URL,
     API_KEY     = process.env.RANCHER_KEY,
     API_SECRET  = process.env.RANCHER_SECRET;
 
+var BATCH_SIZE  = parseInt(process.env.DEPLOY_BATCH_SIZE) || 3,
+    START_FIRST = ['true', 'on', '1'].includes(process.env.DEPLOY_START_FIRST);
+
 var args = process.argv.slice(2);
 if(args.length < 3) {
     console.error('At least 3 arguments are required: deploy.js environmentId serviceID dockerImage');
@@ -86,9 +89,9 @@ function upgradeService(environmentId, serviceId, launchConfig, callback) {
         .set('Content-Type', 'application/json')
         .send({
             "inServiceStrategy": {
-                "batchSize": 3,
+                "batchSize": BATCH_SIZE,
                 "intervalMillis": 2000,
-                "startFirst": true,
+                "startFirst": START_FIRST,
                 "launchConfig": launchConfig
             }
         })
