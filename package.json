@@ -4,12 +4,15 @@
   "description": "",
   "main": "deploy.js",
   "scripts": {
-    "deploy": " node deploy.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "node deploy.js",
+    "debug": "RANCHER_URL=https://rancher.updatemi.io/v2-beta RANCHER_KEY=FDC9F6DFF436958E3EBA RANCHER_SECRET=XXsQhszHXZDM3yvsRSR5YAKrfi9TLwA2bPtjHLZC node deploy.js 1a21 updatemi-api updatemi/api:latest"
   },
   "author": "kl4n4",
   "license": "ISC",
   "dependencies": {
-    "superagent": "^3.4.1"
+    "node-fetch": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^1.6.7"
   }
 }

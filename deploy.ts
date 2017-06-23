@@ -1,16 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Rancher_js_1 = require("./src/api/Rancher.js");
-var args = process.argv.slice(2);
-if (args.length < 3) {
+import { Rancher, RancherServiceInfo } from "./src/api/Rancher.js";
+
+const args = process.argv.slice(2);
+if(args.length < 3) {
     console.error('At least 3 arguments are required: deploy.js environmentId serviceID dockerImage');
     process.exit(1);
 }
-var environmentId = args[0], service = args[1], image = args[2];
-var rancher = new Rancher_js_1.Rancher(process.env.RANCHER_URL, process.env.RANCHER_KEY, process.env.RANCHER_SECRET);
-rancher.deploy(environmentId, service, image).then(function (data) {
+const environmentId = args[0],
+    service = args[1],
+    image = args[2];
+
+const rancher = new Rancher(
+    process.env.RANCHER_URL,
+    process.env.RANCHER_KEY,
+    process.env.RANCHER_SECRET,
+)
+
+rancher.deploy(environmentId, service, image).then((data:any) => {
     console.info(data.data);
 });
+
 // if(service.indexOf('id:') === 0) {
 //     rancher.deploy(environmentId, service.substr(3), image);
 // } else {
